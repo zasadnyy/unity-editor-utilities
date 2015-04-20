@@ -134,7 +134,7 @@ namespace Zasadnyy.Editors
         {
             EditorGUILayout.BeginVertical();
             
-            var newPath = GUILayout.TextField(path);
+            var newPath = EditorGUILayout.TextField(path);
             
             var isSceneValid = File.Exists(newPath);
             if (!isSceneValid)
