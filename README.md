@@ -21,8 +21,13 @@ To add the extension to your project:
 
 ### Changelog
 
+##### v.0.2
+- Added basic scene path validation
+- Fixed issue #1: now copy/paste handled correctly
+- Fixed issue #2: now scenes added with template `Assets/Scenes/` path
+
 ##### v.0.1
-- initial release
+- Initial release
 
 
 ### Licence
