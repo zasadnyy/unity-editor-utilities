@@ -31,9 +31,8 @@ namespace Zasadnyy.Editors
 {
     public class EditorUtilitiesWindow : EditorWindow
     {
-        private const string SETTINGS_ASSET_NAME = "EditorUtilitiesSettings";
-        private const string SETTINGS_FILE_NAME = SETTINGS_ASSET_NAME + ".asset";
-        private const string SETTINGS_DIRECTORY = "Assets/EditorUtilities/Editor/Resources/";
+        private const string SETTINGS_FILE_NAME = "EditorUtilitiesSettings.asset";
+        private const string SETTINGS_DIRECTORY = "Assets/EditorUtilities/Editor/";
 
         private EditorUtilitiesSettings _settings;
         private Vector2 _scrollViewPosition;
@@ -141,6 +140,8 @@ namespace Zasadnyy.Editors
             GUI.color = Color.green;
             if (GUILayout.Button("Done", EditorStyles.toolbarButton))
             {
+                EditorUtility.SetDirty(_settings);
+                AssetDatabase.SaveAssets();
                 _isInSettingsMode = false;
             }
             GUI.color = backUpColor;
@@ -224,7 +225,7 @@ namespace Zasadnyy.Editors
                 CreateAsset<EditorUtilitiesSettings>(SETTINGS_DIRECTORY, SETTINGS_FILE_NAME);
             }
             
-            return Resources.Load<EditorUtilitiesSettings>(SETTINGS_ASSET_NAME);
+            return AssetDatabase.LoadAssetAtPath(SETTINGS_DIRECTORY + SETTINGS_FILE_NAME, typeof(EditorUtilitiesSettings)) as EditorUtilitiesSettings;
         }
 
         private void DrawList<T>(string title, ref List<T> list, Func<T,T> drawListItem, Func<T> createListItem)
@@ -267,7 +268,7 @@ namespace Zasadnyy.Editors
             }
             
             AssetDatabase.CreateAsset(conf, directory + name);
-            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
             
             EditorUtility.FocusProjectWindow();
         }
