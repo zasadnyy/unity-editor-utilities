@@ -118,16 +118,32 @@ namespace Zasadnyy.Editors
             EditorGUI.BeginDisabledGroup(!_settings.showSceneShortcuts);
             
             EditorGUILayout.Space();
-            DrawList("Launch Scenes", ref _settings.launchSceneShortcuts, 
-                     drawListItem: (scene) => GUILayout.TextField(scene), 
-                     createListItem: () => "");
+            DrawList("Launch Scenes", ref _settings.launchSceneShortcuts,
+                     drawListItem: (scene) => DrawScenePathField(scene),
+                     createListItem: () => "Assets/Scenes/");
             
             EditorGUILayout.Space();
-            DrawList("Goto Scenes", ref _settings.workingSceneShortcuts, 
-                     drawListItem: (scene) => GUILayout.TextField(scene), 
-                     createListItem: () => "");
+            DrawList("Goto Scenes", ref _settings.workingSceneShortcuts,
+                     drawListItem: (scene) => DrawScenePathField(scene),
+                     createListItem: () => "Assets/Scenes/");
             
             EditorGUI.EndDisabledGroup();
+        }
+
+        private string DrawScenePathField(string path)
+        {
+            EditorGUILayout.BeginVertical();
+            
+            var newPath = GUILayout.TextField(path);
+            
+            var isSceneValid = File.Exists(newPath);
+            if (!isSceneValid)
+            {
+                EditorGUILayout.HelpBox ("Scene doesn't exist", MessageType.Error);
+            }
+            
+            EditorGUILayout.EndVertical();
+            return newPath;
         }
 
         private void DrawSettingsToolbar()
