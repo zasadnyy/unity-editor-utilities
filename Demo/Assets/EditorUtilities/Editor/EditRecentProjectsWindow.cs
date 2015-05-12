@@ -49,8 +49,8 @@ namespace Zasadnyy.Editors
         void OnGUI()
         {
             GUILayout.Space(15);
-            EditorGUILayout.HelpBox("Tired of long list of recent projects in \"File -> Open Project...\" menu?\n" +
-                "Now you can remove unneeded projects with one clik. Enjoy!", MessageType.None);
+            EditorGUILayout.HelpBox("Tired of long list of recent projects in \"File -> Open Project...\" popup?\n" +
+                "Now you can remove unneeded projects with one click. Enjoy!", MessageType.None);
             if(recentProjects.Count > 0)
             {
                 DrawRecentProjects();
@@ -83,7 +83,7 @@ namespace Zasadnyy.Editors
                     RemoveRecentProject(prefKey);
                 }
                 
-                EditorGUILayout.LabelField(recentProject);
+                EditorGUILayout.LabelField(new GUIContent(recentProject, recentProject));
                 
                 EditorGUILayout.EndHorizontal();
             }
