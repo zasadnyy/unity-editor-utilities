@@ -2,6 +2,7 @@
 
 Set of editor extensions to show current editor state, create working scene shortcuts and edit recent projects list.
 
+**[Get it on Unity Asset Store](https://www.assetstore.unity3d.com/en/#!/content/37101)**
 
 ### Features
 
